@@ -1,0 +1,10 @@
+<h1>Your Rank</h1>
+<% if @leaderboard %>
+  <p>User: <%= @user[:username] %> (ID: <%= @user.id %>)</p>
+  <p>Total Score: <%= @leaderboard[:total_score] %></p>
+  <p>Rank: <%= @leaderboard[:rank] %></p>
+<% else %>
+  <p>User not found or not on the leaderboard.</p>
+<% end %>
+<br>
+<a href="/leaderboard/index">Back to Leaderboard</a> 
