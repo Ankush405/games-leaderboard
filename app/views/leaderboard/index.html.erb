@@ -1,0 +1,27 @@
+<h1>Leaderboard - Top 10 Players</h1>
+
+<table border="1">
+  <tr>
+    <th>Rank</th>
+    <th>Username</th>
+    <th>Total Score</th>
+  </tr>
+  <% @top_players.each do |entry| %>
+    <tr>
+      <td><%= entry[:rank] %></td>
+      <td><%= entry[:username] %></td>
+      <td><%= entry[:total_score] %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+
+<br>
+<form action="/leaderboard/show_rank" method="get">
+  <label for="user_id">Check Your Rank (User ID):</label>
+  <input type="number" name="user_id" id="user_id" required>
+  <input type="submit" value="Check Rank">
+</form>
+<script>
+  setTimeout(function() { window.location.reload(); }, 10000);
+</script> 

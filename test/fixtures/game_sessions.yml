@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  score: 1
+  game_mode: MyString
+  timestamp: 2025-07-08 21:34:31
+
+two:
+  user: two
+  score: 1
+  game_mode: MyString
+  timestamp: 2025-07-08 21:34:31
