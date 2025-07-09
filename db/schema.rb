@@ -26,7 +26,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_201554) do
     t.bigint "user_id", null: false
     t.integer "total_score"
     t.integer "rank"
-    t.index ["total_score"], name: "index_leaderboards_on_total_score"
+    t.index ["total_score"], name: "index_leaderboards_on_total_score", order: :desc
     t.index ["user_id"], name: "index_leaderboards_on_user_id"
   end
 
