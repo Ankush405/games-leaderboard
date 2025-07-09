@@ -20,12 +20,10 @@ class LeaderboardController < ApplicationController
     user_id = params[:user_id]
     @user = User.find_by(id: user_id)
     @leaderboard = Rails.cache.fetch("leaderboard/rank/#{user_id}", expires_in: 30.seconds) do
-      subquery = <<~SQL
-        SELECT user_id, total_score, RANK() OVER (ORDER BY total_score DESC) AS computed_rank
-        FROM leaderboards
-      SQL
-
-      ranked = ActiveRecord::Base.connection.exec_query("SELECT * FROM (#{subquery}) AS ranked WHERE user_id = #{user_id.to_i}").first
+      ranked = Leaderboard
+                  .select("total_score, RANK() OVER (ORDER BY total_score DESC) as computed_rank")
+                  .where(user_id: user_id)
+                  .order("total_score DESC").first
 
       if ranked
         {
