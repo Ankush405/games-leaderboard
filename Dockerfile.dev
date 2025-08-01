@@ -1,0 +1,24 @@
+FROM ruby:3.3-alpine3.21
+
+# Install dependencies
+RUN apk --update add build-base nodejs tzdata postgresql-dev postgresql-client libxslt-dev libxml2-dev imagemagick yaml-dev
+
+RUN apk add --no-cache \
+  build-base \
+  git \
+  pkgconf
+
+
+# set working directory
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# RUN gem install bundler
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
