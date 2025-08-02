@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: ankush405/game-leaderboard-app:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RAILS_ENV
+          value: development
+        - name: PGHOST
+          valueFrom:        
+            secretKeyRef:
+              name: webapp-secret
+              key: PGHOST
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: webapp-secret
+              key: PGUSER
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: webapp-secret
+              key: PGPASSWORD 
